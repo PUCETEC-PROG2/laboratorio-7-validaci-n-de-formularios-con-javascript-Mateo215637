@@ -1,11 +1,11 @@
 // Esperar a que el DOM esté completamente cargado
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
-    
+
     // Escuchar el evento submit del formulario
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevenir envío por defecto
-        
+
         // Llamar a la función de validación
         if (validateForm()) {
             alert('✅ ¡Formulario válido! Registro exitoso.');
@@ -23,13 +23,13 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function validateForm() {
     let isValid = true;
-    
+
     // ==========================================
     // VALIDACIÓN DE EJEMPLO: Campo Nombre
     // ==========================================
     const nombre = document.getElementById('nombre');
     const valorNombre = nombre.value.trim();
-    
+
     if (valorNombre === '') {
         // Campo vacío - marcar como inválido
         nombre.classList.add('no-valid');
@@ -42,74 +42,130 @@ function validateForm() {
         // Campo válido - remover marca de error si existe
         nombre.classList.remove('no-valid');
     }
-    
+
     // ==========================================
     // TODO: Validar Apellido Paterno
     // ==========================================
     // Requisitos: No vacío, mínimo 2 caracteres
     // Pista: Usa getElementById('apellidoPaterno')
-    
+
     // Tu código aquí...
-    
-    
+    const apellidoPaterno = document.getElementById('apellidoPaterno');
+    const valorApellidoPaterno = apellidoPaterno.value.trim();
+
+    if (valorApellidoPaterno === '') {
+        apellidoPaterno.classList.add('no-valid');
+        isValid = false;
+    } else if (valorApellidoPaterno.length < 2) {
+        apellidoPaterno.classList.add('no-valid');
+        isValid = false;
+    } else {
+        apellidoPaterno.classList.remove('no-valid');
+    }
+
     // ==========================================
     // TODO: Validar Apellido Materno
     // ==========================================
     // Requisitos: No vacío, mínimo 2 caracteres
-    
+
     // Tu código aquí...
-    
-    
+    const apellidoMaterno = document.getElementById('apellidoMaterno');
+    const valorApellidoMaterno = apellidoMaterno.value.trim();
+
+    if (valorApellidoMaterno === '') {
+        apellidoMaterno.classList.add('no-valid');
+        isValid = false;
+    } else if (valorApellidoMaterno.length < 2) {
+        apellidoMaterno.classList.add('no-valid');
+        isValid = false;
+    } else {
+        apellidoMaterno.classList.remove('no-valid');
+    }
+
     // ==========================================
     // TODO: Validar Cédula
     // ==========================================
     // Requisitos: Exactamente 10 dígitos numéricos
     // Pista: Usa /^\d{10}$/.test(valor) para validar
-    
+
     // Tu código aquí...
-    
-    
+    const cedula = document.getElementById('cedula');
+    const valorCedula = cedula.value.trim();
+    const regex = /^\d{10}$/;
+
+    if (!regex.test(valorCedula)) {
+        cedula.classList.add('no-valid');
+        isValid = false;
+    } else {
+        cedula.classList.remove('no-valid');
+    }
+
     // ==========================================
     // TODO: Validar Motivo
     // ==========================================
     // Requisitos: No vacío, mínimo 10 caracteres
-    
+
     // Tu código aquí...
-    
-    
+    const motivo = document.getElementById('motivo');
+    const valorMotivo = motivo.value.trim();
+    const regexMotivo = /^.{10,}$/;
+
+        if (valorMotivo === '') {
+        motivo.classList.add('no-valid');
+        isValid = false;
+    } else if (!regexMotivo.test(valorMotivo)) {
+        motivo.classList.add('no-valid');
+        isValid = false;
+    } else {
+        motivo.classList.remove('no-valid');
+    }
+
+
     // ==========================================
     // TODO: Validar Tipo de Cuenta
     // ==========================================
     // Requisitos: Debe tener un valor seleccionado (no vacío)
     // Pista: Verifica que select.value !== ''
-    
+
     // Tu código aquí...
-    
-    
+    const tipoCuenta = document.getElementById('tipoCuenta');
+    const valorTipoCuenta = tipoCuenta.value.trim();
+
+    if (valorTipoCuenta === '') {
+        tipoCuenta.classList.add('no-valid');
+        isValid = false;
+    } else {
+        tipoCuenta.classList.remove('no-valid');
+    }
+
+
+
+
     // ==========================================
     // TODO: Validar Calle
     // ==========================================
     // Requisitos: No vacío, mínimo 3 caracteres
-    
+
     // Tu código aquí...
-    
-    
+
+
     // ==========================================
     // TODO: Validar Número
     // ==========================================
     // Requisitos: No vacío
-    
+
     // Tu código aquí...
-    
-    
+
+
+
     // ==========================================
     // TODO: Validar Intersección
     // ==========================================
     // Requisitos: No vacío, mínimo 3 caracteres
-    
+
     // Tu código aquí...
-    
-    
+
+
     // Retornar el resultado final de la validación
     return isValid;
 }
@@ -129,7 +185,7 @@ function validateForm() {
  */
 function validarCampoTexto(campo, minLength) {
     const valor = campo.value.trim();
-    
+
     if (valor === '' || valor.length < minLength) {
         campo.classList.add('no-valid');
         return false;
