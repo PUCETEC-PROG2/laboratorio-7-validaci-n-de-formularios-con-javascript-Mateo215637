@@ -148,6 +148,15 @@ function validateForm() {
 
     // Tu código aquí...
 
+const calle = document.getElementById('calle');
+const valorCalle = calle.value.trim();
+
+if (valorCalle === '' || valorCalle.length < 3) {
+    calle.classList.add('no-valid');
+    isValid = false;
+} else {
+    calle.classList.remove('no-valid');
+}
 
     // ==========================================
     // TODO: Validar Número
@@ -157,14 +166,45 @@ function validateForm() {
     // Tu código aquí...
 
 
+const numero = document.getElementById('numero');
 
+if (numero) {
+    const valorNumero = numero.value.trim();
+
+    if (valorNumero === '' || valorNumero === 'a') { 
+        
+        numero.classList.add('no-valid');
+        
+        
+        numero.blur(); 
+
+  
+        numero.style.setProperty('border-color', '#ff6b6b', 'important');
+        numero.style.setProperty('background-color', '#ffe0e0', 'important');
+        
+        isValid = false;
+    } else {
+        numero.classList.remove('no-valid');
+        
+        numero.style.borderColor = '';
+        numero.style.backgroundColor = '';
+    }
+}
     // ==========================================
     // TODO: Validar Intersección
     // ==========================================
     // Requisitos: No vacío, mínimo 3 caracteres
 
     // Tu código aquí...
+const interseccion = document.getElementById('interseccion');
+const valorInterseccion = interseccion.value.trim();
 
+if (valorInterseccion === '' || valorInterseccion.length < 3) {
+    interseccion.classList.add('no-valid');
+    isValid = false;
+} else {
+    interseccion.classList.remove('no-valid');
+}
 
     // Retornar el resultado final de la validación
     return isValid;
